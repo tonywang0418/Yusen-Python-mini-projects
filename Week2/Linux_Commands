@@ -1,0 +1,15 @@
+#1 cd /home/ubuntu
+#2 cd .. /home
+#3 cd /etc  ls deb*    debconf.conf  debian_version
+#4 sudo find /etc -type f -name "*.conf" | wc -l       101
+#5  grep -c "nologin" /etc/passwd  29
+#6  grep -v "nologin" /etc/passwd | wc -l    6
+#7 cd /home   sudo mkdir test1
+#8 sudo nano file1
+#9 sudo rm -r test1
+#10 ls --help
+#11 history
+#12 histroy | grep "cd"
+#13 ls:This command lists the contents of the current directory exclude hidden file.  ls -a: list all file incude hidden file.     ls -l: lists file with more information like permissions, groups.
+#14 uptime 14:54:14 up  1:53,  2 users,  load average: 0.00, 0.00, 0.00
+
