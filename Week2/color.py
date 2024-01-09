@@ -5,18 +5,18 @@
 def main():
     """This function ask for username and color. It will check for letters, it will prompt error message if its not letter"""
     while True:
-        name = input(str("Please enter your user name: "))
+        name = input(str("Please enter your user name: "))  #prompt for input and check if its letter.
         if name.isalpha():
             break
         else:
             print("Please enter only letters.")
     while True:
-        color = input(str("Please enter your color name: "))
+        color = input(str("Please enter your color name: ")) #prompt for input and check if its letter.
         if color.isalpha():
             break   
         else:
             print("Please enter only letters.")
         
         
-    print(f"Your name is {name} and your favorite color is {color}")
+    print(f"Your name is {name} and your favorite color is {color}")  #print username and color.  
 main()
