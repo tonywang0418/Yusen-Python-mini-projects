@@ -14,24 +14,24 @@ def calculate_days(birthdate_dt, days):
 def main(): 
     """Exceptions and run the script """
     if len(sys.argv) != 3:      #Check to make sure user input 3 arugments
-        print("LUsage: Date.py mm-dd-yyyy days  Must be postive integer ")
+        print("Usage: Date.py mm-dd-yyyy days  Must be postive integer ")
         return sys.exit()
     birthdate, days = sys.argv[1], sys.argv[2]     #define each arugments
     
     try:
-       birthdate_dt = datetime.strptime(birthdate, "%m-%d-%Y")  #convert birthdate string into datetime, so it check format and month, day and years based on the datetie(datetime module can handle leap year possiblity)  
+       birthdate_dt = datetime.strptime(birthdate, "%m-%d-%Y")  #convert birthdate string into datetime, so it check format and month, day and years based on the datetime(datetime module can handle leap year possiblity)  
     except ValueError:
-        print("BFUsage: Date.py mm-dd-yyyy days  Must be postive integer ")
+        print("Usage: Date.py mm-dd-yyyy days  Must be postive integer ")
         return sys.exit()
 
     try:    #Check if days is integer
         days= int(days)
     except ValueError:
-        print("DFUsage: Date.py mm-dd-yyyy days  Must be postive integer ")
+        print("Usage: Date.py mm-dd-yyyy days  Must be postive integer ")
         return sys.exit()
     
     if days <= 0:    #Check if days is postive
-        print("DNUsage: Date.py mm-dd-yyyy days  Must be postive integer")
+        print("Usage: Date.py mm-dd-yyyy days  Must be postive integer")
         return sys.exit()
 
     print(f"Person born on {birthdate} will have their {days} birthday on {calculate_days(birthdate_dt, days).strftime('%m-%d-%Y')}.")
