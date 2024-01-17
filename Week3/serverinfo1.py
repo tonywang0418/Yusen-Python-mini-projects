@@ -20,8 +20,13 @@ ram_gb = round(psutil.virtual_memory().total / 1024 / 1024 /1024 ,2)
 os_type = platform.system()
 
 os_version = platform.platform()
-
-disk_count = len(psutil.disk_partitions())
+disk_list=set()  #I made a list to count disk, set() will prevent duplicate
+disk_count = psutil.disk_partitions()     
+for part in disk_count:            #these functions will exclude any device that contains string "loop" and only letter 
+    if 'loop' not in part.device:                                            
+        disk_num = ''.join(char for char in part.device if char.isalpha()) #some disk have mutiple partitions with same name but different number for example (dev/xvda1 and dev/xvda15) I use .isalpha to only accept letter and join each name as a string a way to package every name.
+        disk_list.add(disk_num)
+disks=len(disk_list) 
 
 ip_eth0 = psutil.net_if_addrs()
 
@@ -31,6 +36,6 @@ print(f'CPU(count): {cpu_count}')
 print(f'RAM(GB): {ram_gb}')
 print(f'OSType: {os_type}')
 print(f'OSVersion: {os_version}')
-print(f'Disk(Count): {disk_count}')
+print(f'Disk(Count): {disks}')
 print(f"ip of eth0: {ip_eth0['eth0'][0][1]}")
 print(f"mac of eth0: {ip_eth0['eth0'][2][1]}")
