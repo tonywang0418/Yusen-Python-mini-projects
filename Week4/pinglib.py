@@ -15,7 +15,7 @@ def pingthis(ipordns):
             ping_time = round(float(ping_time_search.group(1)),2)  #After found the match, we need to define group(number) which is ping time. Also rounded 
             return [ipordns, ping_time]
         else:
-            return [ipordns, f'Error: Unable to ping {ipordns}'] #if unreachable
+            return [ipordns, f'Not found'] #if unreachable
     except Exception as a: 
         return [ipordns, f'Error Message: {str(a)}']
 
