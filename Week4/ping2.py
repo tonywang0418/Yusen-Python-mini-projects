@@ -21,6 +21,7 @@ def main():
                 print(f'{result[0]}, {result[1]}') #display in this format
     except FileNotFoundError:
         result = pingthis(filename)
+        print("IP, TimeToPing (ms)")
         print(f'{result[0]}, {result[1]}') # if file not found, treat it as IP or domain name.
 
 if __name__ == "__main__":
