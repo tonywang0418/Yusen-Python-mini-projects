@@ -12,10 +12,19 @@ def findiphonemac(filename):
     with open(filename, 'r') as file:
         for line in file:
             find = re.search("from (\S*) \(iPhone", line)
+            find2 = re.search("from (\S*) \(Alans-iPhone", line)
             if find:
                 mac_address = find.group(1)
-                if mac_address not in macs:  #Make sure there are no repeat mac addresses
+            elif find2:
+                mac_address = find2.group(1)
+            else:
+                continue
+
+            if mac_address not in macs:  #Make sure there are no repeat mac addresses
                     macs.append(mac_address)
+
+                    
+    print(macs)
     return macs
 
 
