@@ -1,0 +1,6 @@
+IP,Open Ports,OS
+152.157.64.4,443,Linux 2.6.32
+152.157.64.5,22 80 443,Linux 4.0
+152.157.64.88,443,Linux 4.4
+152.157.64.107,443,Microsoft Windows Server 2016
+152.157.64.155,80 443,AVtech Room Alert 26W environmental monitor
