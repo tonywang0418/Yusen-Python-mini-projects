@@ -1,0 +1,14 @@
+DNS,IP,Services
+id.nsd.org,35.173.59.37,identification service
+id.nsd.org,44.193.176.111,identification or authentication service
+ns1.nsd.org,152.157.68.27,DNS server
+vpn.nsd.org,152.157.64.4,VPN service
+ns2.nsd.org,152.157.68.28,DNS server
+ns3.nsd.org,20.120.161.221,DNS server
+mail.nsd.org,152.157.69.3,mail service
+www.nsd.org,104.17.162.123,Web hosting/load balanced
+www.nsd.org,104.17.163.123,Web hosting/load balanced
+www.nsd.org,104.17.164.123,Web hosting/load balanced
+www.nsd.org,104.17.165.123,Web hosting/load balanced
+www.nsd.org,104.17.166.123,Web hosting/load balanced
+helpdesk.nsd.org,152.157.69.3,support service
