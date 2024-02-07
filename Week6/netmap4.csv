@@ -1,0 +1,14 @@
+DNS,IP,Services,Country,RegionName,City,Zipcode,ISP
+id.nsd.org,35.173.59.37,identification service,United States,Virginia,Ashburn,20149,America/New_York,"Amazon.com, Inc."
+id.nsd.org,44.193.176.111,identification or authentication service,United States,Virginia,Ashburn,20149,America/New_York,Amazon.com
+ns1.nsd.org,152.157.68.27,DNS server,United States,Washington,Bothell,98011,America/Los_Angeles,Northshore School District
+vpn.nsd.org,152.157.64.4,VPN service,United States,Washington,Bothell,98011,America/Los_Angeles,Northshore School District
+ns2.nsd.org,152.157.68.28,DNS server,United States,Washington,Bothell,98011,America/Los_Angeles,Northshore School District
+ns3.nsd.org,20.120.161.221,DNS server,United States,Washington,Quincy,98848,America/Los_Angeles,Microsoft Corporation
+mail.nsd.org,152.157.69.3,mail service,United States,Washington,Bothell,98011,America/Los_Angeles,Northshore School District
+www.nsd.org,104.17.162.123,Web hosting/load balanced,Canada,Ontario,Toronto,M5A,America/Toronto,"Cloudflare, Inc."
+www.nsd.org,104.17.163.123,Web hosting/load balanced,Canada,Ontario,Toronto,M5A,America/Toronto,"Cloudflare, Inc."
+www.nsd.org,104.17.164.123,Web hosting/load balanced,Canada,Ontario,Toronto,M5A,America/Toronto,"Cloudflare, Inc."
+www.nsd.org,104.17.165.123,Web hosting/load balanced,Canada,Ontario,Toronto,M5A,America/Toronto,"Cloudflare, Inc."
+www.nsd.org,104.17.166.123,Web hosting/load balanced,Canada,Ontario,Toronto,M5A,America/Toronto,"Cloudflare, Inc."
+helpdesk.nsd.org,152.157.69.3,support service,United States,Washington,Bothell,98011,America/Los_Angeles,Northshore School District
