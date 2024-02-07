@@ -34,7 +34,7 @@ def dns_brute(filename):
 
 def main():
     if len(sys.argv) != 2:
-        print("Usage: netmap3.py <domain name>")
+        print("Usage: netmap4.py <input file name>")
         sys.exit()
     filename = sys.argv[1]
     dns_brute(filename)
