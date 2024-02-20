@@ -62,7 +62,7 @@ def check_mode(seconds_between_runs):
 
                     md5_hash = calculate_md5(file_path)
                     time_stamp = zulu_timestamp()
-                    insert_update_mysql_mode(md5_hash, time_stamp, file_path)
+                    #insert_update_mysql_mode(md5_hash, time_stamp, file_path)
 
                     if old_hash != md5_hash:
                         status = 'FAIL'
@@ -96,7 +96,7 @@ def main():
 
         md5_hash = calculate_md5(file_path)
         time_stamp = zulu_timestamp()
-        #insert_update_mysql_mode(md5_hash,time_stamp,file_path)
+        insert_update_mysql_mode(md5_hash,time_stamp,file_path)
         mydb.close() #close connection for 'updatehash' mode
         
     elif sys.argv[1] == 'run':         #check mode
