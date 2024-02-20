@@ -87,12 +87,6 @@ def write_csv(checks):
             writer.writeheader()
         for check in checks:
             writer.writerow(check)
-def insert_ipordns(ipordns):
-
-    query = "INSERT INTO `device` (`name`, `macaddress`, `ip`, `cpucount`, `disks`, `ram`, `ostype`, `osversion`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
-    mycursor.execute(query, (hostname, ip_eth0['eth0'][2][1], ip_eth0['eth0'][0][1], cpu_count, disks, ram_gb, os_type, os_version))
-    mydb.commit()
-    mydb.close()
 
 def main():
     if len(sys.argv) != 3 or (sys.argv[1] != 'updatehash' and sys.argv[1] != 'run'):
