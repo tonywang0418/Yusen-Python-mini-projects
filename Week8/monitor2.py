@@ -9,8 +9,10 @@ import hashlib
 import csv
 import time
 #server connection
-mydb = pymysql.connect(host='localhost', user='cmdb', password='sec444bc', database='cmdb') #Another database connection function is in main()
-mycursor = mydb.cursor() #creates cursor object used for CREATE, RETRIEVE, UPDATE AND DELETE.
+def database_connection():
+    mydb = pymysql.connect(host='localhost', user='cmdb', password='sec444bc', database='cmdb')
+    mycursor = mydb.cursor() #creates cursor object used for CREATE, RETRIEVE, UPDATE AND DELETE.
+    return mycursor, mydb
 def calculate_md5(file_path):
     hash_md5 = hashlib.md5()
     with open(file_path, 'rb')as file:
@@ -24,6 +26,7 @@ def calculate_md5(file_path):
 def zulu_timestamp():
     return datetime.utcnow()
 def insert_update_mysql_mode(md5_hash,time_stamp,file_path):
+    mycursor, mydb = database_connection()
     query =  "SELECT * FROM `files` WHERE `path`= %s"  #find the row that contains the path
     mycursor.execute(query,(file_path))
     result = mycursor.fetchone() #fetch one row
@@ -36,11 +39,11 @@ def insert_update_mysql_mode(md5_hash,time_stamp,file_path):
         query =  "INSERT INTO `files` (`timestamp`, `path`, `hash`) VALUES (%s,%s,%s)"
         cursor = mycursor.execute(query,(time_stamp,file_path,md5_hash))
         mydb.commit()
+    mydb.close()
 def check_mode(seconds_between_runs):
     try:
         while True:
-            mydb = pymysql.connect(host='localhost', user='cmdb', password='sec444bc', database='cmdb')
-            mycursor = mydb.cursor()
+            mycursor,mydb = database_connection()  #database connection
 
             query = "SELECT `path` FROM `files`"
             mycursor.execute(query)
@@ -69,7 +72,7 @@ def check_mode(seconds_between_runs):
 
                     message = f"FILE={file_path}, OLD_HASH={old_hash}, OLD_HASH_DATE= {old_time}, CURRENT_HASH={md5_hash}"
                     checks.append({'check date': time_stamp, 'check type': 'filehash', 'status': status, 'message': message})
-        
+
             write_csv(checks)
             time.sleep(seconds_between_runs)
     except KeyboardInterrupt:
@@ -84,6 +87,13 @@ def write_csv(checks):
             writer.writeheader()
         for check in checks:
             writer.writerow(check)
+def insert_ipordns(ipordns):
+
+    query = "INSERT INTO `device` (`name`, `macaddress`, `ip`, `cpucount`, `disks`, `ram`, `ostype`, `osversion`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
+    mycursor.execute(query, (hostname, ip_eth0['eth0'][2][1], ip_eth0['eth0'][0][1], cpu_count, disks, ram_gb, os_type, os_version))
+    mydb.commit()
+    mydb.close()
+
 def main():
     if len(sys.argv) != 3 or (sys.argv[1] != 'updatehash' and sys.argv[1] != 'run'):
         print("Usage: ./monitor <cmd> <options> \n<cmd> is 'updatehash' and  <options> is the full path to the file (e.g. /etc/hosts)\n<cmd> is 'run' and <options> is number of seconds between runs")
@@ -97,13 +107,10 @@ def main():
         md5_hash = calculate_md5(file_path)
         time_stamp = zulu_timestamp()
         insert_update_mysql_mode(md5_hash,time_stamp,file_path)
-        mydb.close() #close connection for 'updatehash' mode
-        
+     
     elif sys.argv[1] == 'run':         #check mode
         seconds_between_runs = int(sys.argv[2])
-        check_mode(seconds_between_runs)            
-        
+        check_mode(seconds_between_runs)
 
-        
 if __name__ == "__main__":
     main()
