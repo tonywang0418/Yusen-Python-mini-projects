@@ -89,7 +89,7 @@ def check_mode(seconds_between_runs):
                     status = 'OK'
                 
                 message = f"TIME(MS)={result[1]}"
-                checks.append({'check date': time_stamp, 'check type': 'pingcheck', 'status': status, 'message': message})
+                checks.append({'check date': time_stamp, 'check type': 'pingcheck', 'status': status, 'message': f"SERVER={server_for_ping},{message}"})
         
             write_csv(checks)
             time.sleep(seconds_between_runs)
@@ -105,6 +105,7 @@ def write_csv(checks):
             writer.writeheader()
         for check in checks:
             writer.writerow(check)
+
 def insert_ipordns(ipordns): 
     mycursor, mydb = database_connection()
     query =  "SELECT * FROM `servers` WHERE `DNSorIP`= %s"
