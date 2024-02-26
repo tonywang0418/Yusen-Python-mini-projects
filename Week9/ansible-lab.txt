@@ -1,0 +1,103 @@
+Starting Nmap 7.80 ( https://nmap.org ) at 2024-02-25 22:00 PST
+Nmap scan report for ec2-3-231-18-30.compute-1.amazonaws.com (3.231.18.30)
+Host is up (0.00095s latency).
+Not shown: 998 closed ports
+PORT   STATE    SERVICE VERSION
+22/tcp open     ssh     OpenSSH 8.7 (protocol 2.0)
+25/tcp filtered smtp
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 1.84 seconds
+
+Pinging 35.153.111.154 with 32 bytes of data:
+Reply from 35.153.111.154: bytes=32 time<1ms TTL=63
+Reply from 35.153.111.154: bytes=32 time<1ms TTL=63
+Reply from 35.153.111.154: bytes=32 time<1ms TTL=63
+Reply from 35.153.111.154: bytes=32 time<1ms TTL=63
+
+Ping statistics for 35.153.111.154:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 0ms, Average = 0ms
+
+ubuntu@ip-172-31-80-180:~/ansible$ ansible linux1 -m ping
+The authenticity of host '35.153.111.154 (35.153.111.154)' can't be established.
+ED25519 key fingerprint is SHA256:np0LhOryfEHUuejIO6z72s/3+M8E1ziyv3jTHD7+eXs.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+linux1 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+ubuntu@ip-172-31-80-180:~/ansible$ ansible linux2 -m ping
+The authenticity of host '3.231.18.30 (3.231.18.30)' can't be established.
+ED25519 key fingerprint is SHA256:I/vgA4AGfJkSgfnpAOmvJP6B9kn5awagCHTbfbKx5pc.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+linux2 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+ubuntu@ip-172-31-80-180:~/ansible$ ansible linux2 -m ping
+The authenticity of host '3.231.18.30 (3.231.18.30)' can't be established.
+ED25519 key fingerprint is SHA256:I/vgA4AGfJkSgfnpAOmvJP6B9kn5awagCHTbfbKx5pc.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+linux2 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+ubuntu@ip-172-31-80-180:~/ansible$ ansible linux -a "df -h"
+linux2 | CHANGED | rc=0 >>
+Filesystem      Size  Used Avail Use% Mounted on
+devtmpfs        4.0M     0  4.0M   0% /dev
+tmpfs           977M     0  977M   0% /dev/shm
+tmpfs           391M   11M  381M   3% /run
+/dev/xvda4      9.2G  1.6G  7.6G  18% /
+/dev/xvda3      536M  255M  282M  48% /boot
+/dev/xvda2      200M  7.0M  193M   4% /boot/efi
+tmpfs           196M     0  196M   0% /run/user/1000
+tmpfs           196M     0  196M   0% /run/user/0
+linux1 | CHANGED | rc=0 >>
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/root       7.6G  4.1G  3.6G  54% /
+tmpfs           979M  148K  978M   1% /dev/shm
+tmpfs           392M  880K  391M   1% /run
+tmpfs           5.0M     0  5.0M   0% /run/lock
+/dev/xvda15     105M  6.1M   99M   6% /boot/efi
+tmpfs           196M  4.0K  196M   1% /run/user/1000
+tmpfs           196M  4.0K  196M   1% /run/user/0
+
+
+ubuntu@ip-172-31-80-180:~/ansible$ ansible windows1 -m win_ping
+windows1 | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+
+ubuntu@ip-172-31-80-180:~/ansible$ ansible windows1 -m win_shell -a 'gci c:\'
+windows1 | CHANGED | rc=0 >>
+
+
+    Directory: C:\
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         8/18/2021  11:24 PM                EFI
+d-----          5/8/2021   1:20 AM                PerfLogs
+d-r---         2/20/2024  12:14 PM                Program Files
+d-----         7/11/2023   7:40 PM                Program Files (x86)
+d-----         2/20/2024  12:14 PM                Python312
+d-----         2/20/2024  12:12 PM                tools
+d-r---         2/20/2024  11:48 AM                Users
+d-----         2/20/2024  12:14 PM                Windows
