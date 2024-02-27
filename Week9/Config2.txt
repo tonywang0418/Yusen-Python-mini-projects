@@ -1,0 +1,18 @@
+ansible all -i hosts -m setup | grep -i ansible_os_family
+ansible all -i hosts -m setup | grep -i ansible_distribution_version
+ansible windows -i hosts -m win_shell -a "Get-NetIPConfiguration"
+ansible linux -i hosts -m setup -a 'filter=ansible_default_ipv4'
+ansible linux -i hosts -m setup | grep -i SHELL
+ansible windows -i hosts -m win_shell -a "echo $SHELL"
+ansible linux -i hosts -m shell -a "ls -l /"
+ansible linux -i hosts -m shell -a "df -h"
+ansible windows -i hosts -m win_command -a "wmic logicaldisk get deviceid, freespace, size"
+ansible windows -i hosts -m win_shell -a "tasklist"
+ansible linux_hosts -i inventory_file -m shell -a "mkdir /TEST"
+ansible windows -i hosts -m win_file -a "path=C:\\TEST state=directory"
+ansible linux -i hosts -m copy -a "src=/home/ubuntu/testfile.txt dest=/TEST/testfile.txt"
+ansible windows -i hosts -m win_copy -a "src=/home/ubuntu/testfile.txt dest=C:\TEST"
+ansible linux -i hosts -m shell -a "ls -l /TEST/*"
+ansible windows -i hosts -m win_shell -a "dir C:\\TEST"
+ansible linux -i hosts -m shell -a "ls -ld /TEST"
+ansible windows -i hosts -m win_stat -a "path=C:\\TEST" | grep -i owner
