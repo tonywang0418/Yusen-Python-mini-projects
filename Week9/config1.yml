@@ -1,0 +1,14 @@
+---
+- name: check if a machine is up
+  hosts: linux, windows
+
+  tasks:
+    - name: ping linux machines
+      ping:
+      when: ansible_os_family == 'Linux'
+
+    - name: ping windows machine
+      win_ping:
+      when: ansible_os_family == 'Windows'
+
+        
