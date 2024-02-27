@@ -1,0 +1,11 @@
+---
+- name: install sysstat and verify iostat 
+  hosts: linux
+  tasks:
+    - name: install sysstat on linux1(Debian) and linux2(Redhat)
+      package:
+        name: sysstat 
+        state: latest
+    
+  
+
