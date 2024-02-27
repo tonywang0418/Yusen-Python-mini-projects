@@ -1,0 +1,3 @@
+ansible linux -i hosts -m command -a "iostat"
+ansible linux1 -i hosts -m apt -a "name=sysstat state=absent"
+ansible linux2 -i hosts -m yum -a "name=sysstat state=absent"
