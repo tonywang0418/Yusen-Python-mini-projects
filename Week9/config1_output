@@ -1,0 +1,23 @@
+ubuntu@ip-172-31-80-180:~/ansible$ ansible-playbook config1.yml
+
+PLAY [check if a machine is up] ****************************************************************************************************************************
+
+TASK [Gathering Facts] *************************************************************************************************************************************
+ok: [linux1]
+ok: [linux2]
+ok: [windows1]
+
+TASK [ping linux machines] *********************************************************************************************************************************
+skipping: [linux1]
+skipping: [linux2]
+skipping: [windows1]
+
+TASK [ping windows machine] ********************************************************************************************************************************
+skipping: [linux1]
+skipping: [linux2]
+ok: [windows1]
+
+PLAY RECAP *************************************************************************************************************************************************
+linux1                     : ok=1    changed=0    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0
+linux2                     : ok=1    changed=0    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0
+windows1                   : ok=2    changed=0    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0
