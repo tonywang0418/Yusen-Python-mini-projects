@@ -1,3 +1,2 @@
-*/1 * * * * ansible linux -i /home/ubuntu/ansible/hosts -m command -a "iostat" 
-*/1 * * * * ansible-playbook /home/ubuntu/ansible/config3.yml
-
+*/5 * * * * /home/ubuntu/.local/bin/ansible-playbook /home/ubuntu/ansible/config3.yml
+*/5 * * * * /home/ubuntu/.local/bin/ansible linux -i /home/ubuntu/ansible/hosts -m command -a "iostat"
