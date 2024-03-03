@@ -1,0 +1,45 @@
+---
+- name: Configure a windows machine
+  hosts: windows
+  tasks:
+    - name: Create local user named User1 on windows machine
+      win_user:
+        name: User1
+        state: present
+    
+    - name: Create a windows group named Group1
+      win_group:
+        name: Group1
+        state: present
+    
+    - name: Add User1 to Group1
+      win_group_membership:
+        name: Group1
+        members: User1
+        state: present 
+
+    - name: Create a directory called c:\Shared on the windows machine
+      win_file:
+        path: C:\Shared
+        state: directory
+
+    - name: Give Group1 full access to C:\Shared directory
+      win_acl:
+        path: C:\Shared
+        rights: FullControl
+        state: present
+        type: allow
+        user: Group1
+
+    - name: Share C:\Shared out with only Group1 having access to it
+      win_share:
+        name: Shared
+        path: C:\Shared
+        description: Shared directory only for Group1
+        state: present
+
+    - name: Installs sshd on the windows server
+      win_chocolatey:
+        name: openssh
+        state: present 
+
