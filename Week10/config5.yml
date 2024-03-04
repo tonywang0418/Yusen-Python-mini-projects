@@ -1,0 +1,55 @@
+---
+- name: Configure linux servers
+  hosts: linux 
+  
+  tasks:
+    - name: Install vimrc file
+      copy:
+        src: /home/ubuntu/vimrc 
+        dest: /etc/vim/
+
+    - name: Install python3, sysstat, ss chrony and git packages
+      package:
+        name:
+          - python3
+          - sysstat
+          - chrony
+          - git
+
+    - name: Set timezone America/Los_Angeles
+      timezone:
+        name: America/Los_Angeles
+
+    - name: Add localadmin user
+      user:
+        name: localadmin
+        groups: "{{'sudo' if inventory_hostname == 'linux1' else 'wheel'}}"  
+        shell: /bin/bash
+        append: yes 
+        generate_ssh_key: yes
+        ssh_key_bits: 2048 
+
+    - name: Update all packages on Ubuntu
+      apt:
+        name: "*"
+        update_cache: yes
+        state: latest
+      when: ansible_os_family == 'Debian'
+
+    - name: Update all packages on Redhat
+      yum:
+        name: "*"
+        state: latest
+      when: ansible_os_family == 'RedHat'
+
+
+
+
+
+
+
+
+
+
+
+
