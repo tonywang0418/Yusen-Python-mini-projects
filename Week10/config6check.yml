@@ -1,0 +1,23 @@
+---
+- name: lists all Windows updates available to a logfile & copy the log file back to the linux machine
+  hosts: all
+
+  tasks:
+    - name: Create logfile on Windows machines
+      win_file:
+        path: C:\win_updates.log
+        state: touch
+      when: ansible_os_family == 'Windows'
+
+    - name: Search-only, return list of found updates (if any), log to C:\win_updates.log
+      win_updates:
+        category_names: '*'
+        state: searched
+        log_path: C:\win_updates.log
+      when: ansible_os_family == 'Windows'
+
+    - name: Copy the logfile back to linux machine
+      fetch:
+        src: C:\win_updates.log
+        dest: /home/ubuntu/ansible/
+      when: ansible_os_family == 'Windows'
