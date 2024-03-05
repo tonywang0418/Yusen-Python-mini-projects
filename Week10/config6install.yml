@@ -1,0 +1,12 @@
+---
+- name: Installs all but the optional windows updates and reboots the server as needed
+  hosts: windows
+
+  tasks:
+    - name: Install all security, critical, and rollup updates and reboot if needed
+      win_updates:
+        category_names:
+          - SecurityUpdates
+          - CriticalUpdates
+          - UpdateRollups
+        reboot: true
