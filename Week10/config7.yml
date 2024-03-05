@@ -1,0 +1,25 @@
+---
+- name: performs filehash checks to assure that a file did not change
+  hosts: linux1
+  
+  vars:
+    expected_hash: "52718b4546875fb54d80357d3e204d18e99e7b284f871970a9801f94f6eb5351"
+    file_path: "/home/ubuntu/ansible/test.txt"
+
+  tasks:
+    - name: Generate file hash
+      stat:
+        path: "{{file_path}}"
+        checksum_algorithm: sha256
+      register: file_hash
+
+    - name: compare file hash, if doesn't match, prompt fail message
+      fail:
+        msg: "File hash does not match!"
+      when: file_hash.stat.checksum != expected_hash
+
+    - name: prompt "Matched" when file hash matches
+      debug:
+        msg: "Matched"
+      when: file_hash.stat.checksum == expected_hash
+
